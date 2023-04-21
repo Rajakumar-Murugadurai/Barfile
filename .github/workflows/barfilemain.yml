@@ -20,10 +20,13 @@ jobs:
         distribution: 'adopt'
 
     - name: Build with Maven
-      run: mvn clean package
+      run: |
+        mvn clean package
+        ls target/
+        # Check the generated .bar file name, and update the path parameter accordingly
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: my-bar-file
-        path: target/my-bar-file.bar
+        path: target/my-bar-file-1.0-SNAPSHOT.bar
