@@ -1,0 +1,29 @@
+name: Build and deploy bar file
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+		  distribution: 'adopt'
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Upload bar file as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-bar-file
+          path: target/my-bar-file.bar
